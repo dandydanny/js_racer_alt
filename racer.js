@@ -1,13 +1,9 @@
-function Player(player_name){
+var Player(player_name){
 	this.position = 0;
 	this.name = player_name;
 	console.log(name);
 
 	console.log(track_length);
-
-	if (this.position == track_length) {
-		console.log("player 1 win");
-	}
 
 	this.advance = function()
 	{
