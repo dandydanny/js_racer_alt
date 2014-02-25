@@ -30,7 +30,7 @@ var Player = function (player_name){
 // }
 
 function resetRace(){
-	position=0;
+  // reset DOM - view
 	$(".player").css("left", "0px");
 	return position;
 }
@@ -41,18 +41,35 @@ $(document).ready(function() {
 
   // global vars
 	window.track_length = 100;
-	window.enable_race = true;
+	window.enable_race = false;
 
+  // make - birth players
 	var p1 = new Player("Tommy");
 	var p2 = new Player("Aaron");
 
+  // setup init game state
+  $("button.input").prop("disabled", true);
+  $("#reset-button").css("display", "none");
+
+
+  // reset-button
 	$("#reset-button").click(function(){
 		position = p1.reset();
     position = p2.reset();
     resetRace();
     enable_race = true;
     $("button.input").prop("disabled", false);
+    $("#reset-button").css("display", "none");
 	});
+
+  // start-button
+  $("#start-button").click(function(){
+    position = p1.reset();
+    position = p2.reset();
+    resetRace();
+    enable_race = true;
+    $("button.input").prop("disabled", false);
+  });
 
 	console.log(p1);
 	console.log(p1.name);
@@ -67,7 +84,7 @@ $(document).ready(function() {
     if (enable_race == false) {
       console.log("disabling buttons...");
       $("button.input").prop("disabled", true);
-      $("#reset-button").css("display", "block");
+      $("#reset-button").css("display", "inline-block");
     }
 	});
 
@@ -75,10 +92,15 @@ $(document).ready(function() {
     p2.advance();
     console.log(p2.position);
     $(".p2").css("left", p2.position);
+    
+    // disable or unbind user input until reset
+    if (enable_race == false) {
+      console.log("disabling buttons...");
+      $("button.input").prop("disabled", true);
+      $("#reset-button").css("display", "inline-block");
+    }
   });
 
-
-	console.log(p1.position);
 
 });
 
