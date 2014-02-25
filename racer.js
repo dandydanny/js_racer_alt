@@ -1,4 +1,4 @@
-var Player(player_name){
+var Player = function (player_name){
 	this.position = 0;
 	this.name = player_name;
 	console.log(name);
@@ -41,7 +41,8 @@ $(document).ready(function() {
 	var p2 = new Player("Aaron");
 
 	$("#reset-button").click(function(){
-		position = resetRace();
+		position = p1.reset();
+    resetRace();
 	});
 
 	console.log(p1);
