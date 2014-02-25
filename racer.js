@@ -15,7 +15,8 @@ var Player = function (player_name){
 		if (this.position == track_length){
 			console.log(this.name + " wins!")
 			$('.status').html("<div class=\"status\">" + this.name + " Wins!</div>")
-		}
+		  enable_race = false;
+    }
 	}
 
 	this.reset = function()
@@ -23,6 +24,10 @@ var Player = function (player_name){
 		this.position = 0;
 	}
 }
+
+// Player.prototype.advance {
+//   // prototype fn, saves memory
+// }
 
 function resetRace(){
 	position=0;
@@ -34,6 +39,7 @@ $(document).ready(function() {
 
 	console.log("js ready");
 
+  // global vars
 	window.track_length = 100;
 	window.enable_race = true;
 
@@ -42,18 +48,35 @@ $(document).ready(function() {
 
 	$("#reset-button").click(function(){
 		position = p1.reset();
+    position = p2.reset();
     resetRace();
+    enable_race = true;
+    $("button.input").prop("disabled", false);
 	});
 
 	console.log(p1);
 	console.log(p1.name);
 	console.log(p1.position);
 
-	$("#advance-button").click(function(){
+	$("#advance-button-1").click(function(){
 		p1.advance();
 		console.log(p1.position);
 		$(".p1").css("left", p1.position);
+    
+    // disable or unbind user input until reset
+    if (enable_race == false) {
+      console.log("disabling buttons...");
+      $("button.input").prop("disabled", true);
+      $("#reset-button").css("display", "block");
+    }
 	});
+
+  $("#advance-button-2").click(function(){
+    p2.advance();
+    console.log(p2.position);
+    $(".p2").css("left", p2.position);
+  });
+
 
 	console.log(p1.position);
 

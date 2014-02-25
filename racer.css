@@ -23,3 +23,7 @@
 .p2 {
 	background: red;
 }
+
+#reset-button {
+	display: none;
+}
